@@ -29,12 +29,22 @@ header h1 {
   height: calc(100vh - 100px);
 }
 
+.word .gameon {
+  height: 100%;
+}
+
+.word .gameon.gameover-overlay {
+  filter: blur(5px);
+  opacity: 0.6;
+  pointer-events: none;
+  user-select: none;
+}
+
 .word .word__gameData {
   display: flex;
   justify-content: end;
   gap: 20px;
   padding: 20px 30px;
-
 }
 
 .word .word__container {
@@ -88,7 +98,8 @@ header h1 {
   background-color: #E0E0E0;
 }
 
-.word .word__new-definition {
+.word .word__new-definition,
+.word .play-again {
   padding: 14px 18px;
   font-size: 1.5rem;
   border: 1px solid white;
@@ -96,6 +107,25 @@ header h1 {
   color: white;
 }
 
-.word .word__new-definition:hover {
+.word .word__new-definition:hover,
+.word .play-again:hover {
   background-color: #353839;
+}
+
+.word .gameover {
+  padding: 30px 80px;
+  border: 2px solid black;
+  border-radius: 20px;
+  background-color: #F5F5F5;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+  width: 30vw;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 3;
+  transform: translate(-50%, -50%);
+  text-align: center;
 }

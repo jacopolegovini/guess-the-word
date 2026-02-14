@@ -92,28 +92,46 @@ function checkAnswer(userAnswer: string) {
     answer.value = '';
 }
 
+function playAgain() {
+    word.value = '';
+    definition.value = '';
+    hiddenWord.value = '';
+    answer.value = '';
+    point.value = 0;
+    definitionNumber.value = 0;
+
+    getApi();
+}
+
 onMounted(() => {
-    // getApi();
+    getApi();
 });
 </script>
 
 <template>
     <section class="word">
-        <div class="word__gameData">
-            <p>Attempts left: {{ 10 - definitionNumber }}</p>
-            <p>|</p>
-            <p class="word__points">Points: {{ point }}</p>
+        <div class="gameover" v-show="definitionNumber >= 10">
+            <p>Points: {{ point }}</p>
+            <button class="play-again" @click="playAgain">Play again</button>
         </div>
-        <div class="word__container">
-            <p class="hidden-word">{{ hiddenWord }}</p>
-            <p class="word-definition">{{ definition }}</p>
-            <div class="word__answer">
-                <input type="text" placeholder="Word" v-model="answer" @keyup.enter="checkAnswer(answer)">
-                <button class="word__button-submit" @click="checkAnswer(answer)">Submit</button>
+        <div :class="definitionNumber < 10 ? 'gameon' : 'gameon gameover-overlay'">
+            <div class="word__gameData">
+                <p>Attempts left: {{ 10 - definitionNumber }}</p>
+                <p>|</p>
+                <p class="word__points">Points: {{ point }}</p>
             </div>
-            <button class="word__new-definition pointer" @click="getApi">Generate new definition</button>
+            <div class="word__container">
+                <p class="hidden-word">{{ hiddenWord }}</p>
+                <p class="word-definition">{{ definition }}</p>
+                <div class="word__answer">
+                    <input type="text" placeholder="Word" v-model="answer" @keyup.enter="checkAnswer(answer)">
+                    <button class="word__button-submit" @click="checkAnswer(answer)">Submit</button>
+                </div>
+                <button class="word__new-definition pointer" @click="getApi">Generate new definition</button>
+            </div>
         </div>
     </section>
+
 </template>
 
 <style></style>
