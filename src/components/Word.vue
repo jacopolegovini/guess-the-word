@@ -110,6 +110,11 @@ onMounted(() => {
 
 <template>
     <section class="word">
+        <div class="pug-winner" v-show="point === 9">
+            <img src="/public/8c23bdf8.jpg" alt="pug winner">
+            <p>You are truly the pug master</p>
+            <button class="play-again" @click="playAgain">Play again</button>
+        </div>
         <div class="gameover" v-show="definitionNumber >= 10">
             <p>Points: {{ point }}</p>
             <button class="play-again" @click="playAgain">Play again</button>
