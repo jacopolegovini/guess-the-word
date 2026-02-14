@@ -2,9 +2,9 @@
 </script>
 
 <template>
-    <section class="header">
+    <header class="header">
         <h1>Guess the word</h1>
-    </section>
+    </header>
 </template>
 
 <style></style>
