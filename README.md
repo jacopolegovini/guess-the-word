@@ -1,5 +1,25 @@
-# Vue 3 + TypeScript + Vite
+# 🧩 Word Guess Game
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+A web-based word guessing game built with **Vue 3** and **TypeScript**. 
+The game challenges you to guess a hidden word based on its official dictionary definition.
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+A special prize awaits those who achieve a perfect game, will you be able to get it?
+
+## 🚀 Features
+* **Dynamic Word Generation**: Words are randomly generated for every game.
+* **API Integration**: Definitions are fetched in real-time from the [*Free Dictionary API*](https://dictionaryapi.dev/).
+* **Smart Obfuscation**: A custom algorithm hides letters based on the word length.
+* **Score System**: Gain points for correct answers and face penalties for mistakes.
+* **Limited Attempts**: You have 10 rounds to achieve the "Perfect Game".
+
+## 🛠️ Tech Stack
+* **Framework**: [Vue.js 3 (Composition API)](https://vuejs.org/)
+* **Language**: [TypeScript](https://www.typescriptlang.org/)
+* **HTTP Client**: [Axios](https://axios-http.com/)
+* **Build Tool**: Vite
+
+
+
+Nobody: *"It's an incredibile game!"*
+
+Also nobody: *"This game is improving my general knowledge!"*
