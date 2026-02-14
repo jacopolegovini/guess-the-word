@@ -9,7 +9,7 @@ const hiddenWord = ref<string>('');
 let answer = ref<string>('');
 let point = ref<number>(0);
 let definitionNumber = ref<number>(0);
-
+let attemps = 10;
 /**
  * Permette di nascondere parti della parola
  * @param word la parola selezionata da nascondere
