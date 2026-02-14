@@ -51,6 +51,9 @@ header h1 {
   background-color: white;
   height: 100vh;
   padding: 50px 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .menu.menu-open {
@@ -67,10 +70,15 @@ header h1 {
   cursor: pointer;
 }
 
+.menu h3 {
+  font-size: 1.8rem;
+}
+
 .menu .menu-attemps {
   display: flex;
   align-items: center;
   gap: 15px;
+  font-size: 1.2rem;
 }
 
 .menu input {
@@ -120,6 +128,7 @@ header h1 {
 
 .word .word-definition {
   padding: 0 80px;
+  text-align: center;
 }
 
 .word .hidden-word {

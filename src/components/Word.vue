@@ -2,13 +2,16 @@
 import axios from 'axios';
 import { generate } from "random-words";
 import { onMounted, ref } from 'vue';
+import { useMenuStore } from '../stores/menuStore';
 
+const menuStore = useMenuStore();
 const word = ref<string>('');
 const definition = ref<string>('');
 const hiddenWord = ref<string>('');
 let answer = ref<string>('');
 let point = ref<number>(0);
-let attemps = ref<number>(10);
+let firstApi = true;
+
 /**
  * Permette di nascondere parti della parola
  * @param word la parola selezionata da nascondere
@@ -45,7 +48,7 @@ function hideRandomLetters(word: string) {
  * Chiamata api che prende la definizione dal dizionario in base alla parola generata casualmente tramite il pacchetto random-words
  */
 function getApi() {
-    if (attemps.value === 0) {
+    if (menuStore.attemps === 0) {
         return;
     }
 
@@ -62,8 +65,12 @@ function getApi() {
 
             definition.value = definitionData
 
-            attemps.value--
-
+            if (firstApi === false) {
+                menuStore.attemps--
+            } else {
+                firstApi = false;
+                return;
+            }
         })
         .catch(error => {
             console.error(error);
@@ -101,7 +108,7 @@ function playAgain() {
     hiddenWord.value = '';
     answer.value = '';
     point.value = 0;
-    attemps.value = 10;
+    menuStore.attemps = 10;
 
     getApi();
 }
@@ -111,20 +118,21 @@ onMounted(() => {
 });
 </script>
 
+<!-- ! Sistema il modo in cui gli attemps e i point interagiscono in pug e controlla che giri tutto correttamente -->
 <template>
     <main class="word">
-        <div class="pug-winner" v-show="point === 9">
+        <div class="pug-winner" v-show="point === 10">
             <img src="/src/assets/8c23bdf8.jpg" alt="pug winner">
             <p>You are truly the pug master</p>
             <button class="play-again" @click="playAgain">Play again</button>
         </div>
-        <div class="gameover" v-show="attemps === 0">
+        <div class="gameover" v-show="menuStore.attemps === 0">
             <p>Points: {{ point }}</p>
             <button class="play-again" @click="playAgain">Play again</button>
         </div>
-        <div :class="attemps > 0 || point === 9 ? 'gameon' : 'gameon gameover-overlay'">
+        <div :class="menuStore.attemps > 0 || point === 9 ? 'gameon' : 'gameon gameover-overlay'">
             <div class="word__gameData">
-                <p>Attempts left: {{ attemps }}</p>
+                <p>Attempts left: {{ menuStore.attemps }}</p>
                 <p>|</p>
                 <p class="word__points">Points: {{ point }}</p>
             </div>

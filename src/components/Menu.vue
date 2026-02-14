@@ -7,9 +7,10 @@ const menuStore = useMenuStore();
 <template>
     <div :class="menuStore.isMenuOpen ? 'menu menu-open' : 'menu'">
         <button class="menu-close" @click="menuStore.toggleMenu">&times;</button>
+        <h3>Change the rules</h3>
         <div class="menu-attemps">
             <p>Attemps:</p>
-            <input type="number" min="1" max="20" value="1">
+            <input type="number" min="1" max="20" value="1" v-model="menuStore.attemps">
         </div>
     </div>
 </template>
