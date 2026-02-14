@@ -7,6 +7,8 @@ const word = ref<string>('');
 const definition = ref<string>('');
 const hiddenWord = ref<string>('');
 let answer = ref<string>('');
+let point = ref<number>(0);
+let definitionNumber = ref<number>(0);
 
 /**
  * Permette di nascondere parti della parola
@@ -22,6 +24,10 @@ function hideRandomLetters(word: string) {
         numToHide = 3
     } else if (word.length > 4 && word.length <= 8) {
         numToHide = 4
+    } else if (word.length > 8 && word.length <= 12) {
+        numToHide = 6
+    } else {
+        numToHide = 9
     }
 
     while (hiddenCount < numToHide && hiddenCount < word.length) {
@@ -40,6 +46,10 @@ function hideRandomLetters(word: string) {
  * Chiamata api che prende la definizione dal dizionario in base alla parola generata casualmente tramite il pacchetto random-words
  */
 function getApi() {
+    if (definitionNumber.value >= 10) {
+        return;
+    }
+
     const newWord = generate() as string;
     word.value = newWord;
     const apiUrl = `https://api.dictionaryapi.dev/api/v2/entries/en/${newWord}`;
@@ -52,6 +62,8 @@ function getApi() {
             hiddenWord.value = hideRandomLetters(newWord);
 
             definition.value = definitionData
+
+            definitionNumber.value++
         })
         .catch(error => {
             console.error(error);
@@ -66,10 +78,18 @@ function checkAnswer(userAnswer: string) {
     const cleanAnswer = userAnswer.toLowerCase().trim();
 
     if (cleanAnswer === word.value.toLowerCase()) {
-        alert("Corretto!");
+        getApi();
+        point.value++;
     } else {
-        alert("Sbagliato!");
+        if (point.value === 0) {
+            point.value = 0
+        } else {
+            point.value--;
+        }
+
     }
+
+    answer.value = '';
 }
 
 onMounted(() => {
@@ -79,13 +99,20 @@ onMounted(() => {
 
 <template>
     <section class="word">
-        <p class="hidden-word">{{ hiddenWord }}</p>
-        <p class="word-definition">{{ definition }}</p>
-        <div class="word__answer">
-            <input type="text" placeholder="Word" v-model="answer">
-            <button @click="checkAnswer(answer)">Submit</button>
+        <div class="word__gameData">
+            <p>Attempts left: {{ 10 - definitionNumber }}</p>
+            <p>|</p>
+            <p class="word__points">Points: {{ point }}</p>
         </div>
-        <button class="word__new-definition" @click="getApi">Generate new definition</button>
+        <div class="word__container">
+            <p class="hidden-word">{{ hiddenWord }}</p>
+            <p class="word-definition">{{ definition }}</p>
+            <div class="word__answer">
+                <input type="text" placeholder="Word" v-model="answer" @keyup.enter="checkAnswer(answer)">
+                <button class="word__button-submit" @click="checkAnswer(answer)">Submit</button>
+            </div>
+            <button class="word__new-definition pointer" @click="getApi">Generate new definition</button>
+        </div>
     </section>
 </template>
 

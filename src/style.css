@@ -26,16 +26,32 @@ header h1 {
 
 /* Word */
 .word {
+  height: calc(100vh - 100px);
+}
+
+.word .word__gameData {
+  display: flex;
+  justify-content: end;
+  gap: 20px;
+  padding: 20px 30px;
+
+}
+
+.word .word__container {
   display: flex;
   flex-direction: column;
   gap: 2rem;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - 100px);
+  height: 90%;
 }
 
 .word p {
   font-size: 1.5rem;
+}
+
+.word .word-definition {
+  padding: 0 80px;
 }
 
 .word .hidden-word {
@@ -57,20 +73,29 @@ header h1 {
 }
 
 .word button {
-  padding: 12px 15px;
   border-radius: 15px;
-  background-color: #F5F5F5;
-  border: 1px solid #E0E0E0;
-  font-size: 1rem;
   cursor: pointer;
 }
 
-.word .word button:hover {
+.word .word__button-submit {
+  padding: 12px 15px;
+  background-color: #F5F5F5;
+  border: 1px solid #E0E0E0;
+  font-size: 1rem;
+}
+
+.word .word__button-submit:hover {
   background-color: #E0E0E0;
 }
 
 .word .word__new-definition {
+  padding: 14px 18px;
+  font-size: 1.5rem;
   border: 1px solid white;
   background-color: black;
   color: white;
+}
+
+.word .word__new-definition:hover {
+  background-color: #353839;
 }
