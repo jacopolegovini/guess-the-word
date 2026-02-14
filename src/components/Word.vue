@@ -64,6 +64,7 @@ function getApi() {
             definition.value = definitionData
 
             definitionNumber.value++
+
         })
         .catch(error => {
             console.error(error);
@@ -92,6 +93,9 @@ function checkAnswer(userAnswer: string) {
     answer.value = '';
 }
 
+/**
+ * Una funzione che permette di resettare tutti i dati come se si facesse un reload della pagina.
+ */
 function playAgain() {
     word.value = '';
     definition.value = '';
@@ -109,9 +113,9 @@ onMounted(() => {
 </script>
 
 <template>
-    <section class="word">
+    <main class="word">
         <div class="pug-winner" v-show="point === 9">
-            <img src="/public/8c23bdf8.jpg" alt="pug winner">
+            <img src="/src/assets/8c23bdf8.jpg" alt="pug winner">
             <p>You are truly the pug master</p>
             <button class="play-again" @click="playAgain">Play again</button>
         </div>
@@ -119,7 +123,7 @@ onMounted(() => {
             <p>Points: {{ point }}</p>
             <button class="play-again" @click="playAgain">Play again</button>
         </div>
-        <div :class="definitionNumber < 10 ? 'gameon' : 'gameon gameover-overlay'">
+        <div :class="definitionNumber < 10 || point === 9 ? 'gameon' : 'gameon gameover-overlay'">
             <div class="word__gameData">
                 <p>Attempts left: {{ 10 - definitionNumber }}</p>
                 <p>|</p>
@@ -135,7 +139,7 @@ onMounted(() => {
                 <button class="word__new-definition pointer" @click="getApi">Generate new definition</button>
             </div>
         </div>
-    </section>
+    </main>
 
 </template>
 
