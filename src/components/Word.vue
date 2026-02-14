@@ -8,8 +8,7 @@ const definition = ref<string>('');
 const hiddenWord = ref<string>('');
 let answer = ref<string>('');
 let point = ref<number>(0);
-let definitionNumber = ref<number>(0);
-let attemps = 10;
+let attemps = ref<number>(10);
 /**
  * Permette di nascondere parti della parola
  * @param word la parola selezionata da nascondere
@@ -46,7 +45,7 @@ function hideRandomLetters(word: string) {
  * Chiamata api che prende la definizione dal dizionario in base alla parola generata casualmente tramite il pacchetto random-words
  */
 function getApi() {
-    if (definitionNumber.value >= 10) {
+    if (attemps.value === 0) {
         return;
     }
 
@@ -63,7 +62,7 @@ function getApi() {
 
             definition.value = definitionData
 
-            definitionNumber.value++
+            attemps.value--
 
         })
         .catch(error => {
@@ -102,7 +101,7 @@ function playAgain() {
     hiddenWord.value = '';
     answer.value = '';
     point.value = 0;
-    definitionNumber.value = 0;
+    attemps.value = 10;
 
     getApi();
 }
@@ -119,13 +118,13 @@ onMounted(() => {
             <p>You are truly the pug master</p>
             <button class="play-again" @click="playAgain">Play again</button>
         </div>
-        <div class="gameover" v-show="definitionNumber >= 10">
+        <div class="gameover" v-show="attemps === 0">
             <p>Points: {{ point }}</p>
             <button class="play-again" @click="playAgain">Play again</button>
         </div>
-        <div :class="definitionNumber < 10 || point === 9 ? 'gameon' : 'gameon gameover-overlay'">
+        <div :class="attemps > 0 || point === 9 ? 'gameon' : 'gameon gameover-overlay'">
             <div class="word__gameData">
-                <p>Attempts left: {{ 10 - definitionNumber }}</p>
+                <p>Attempts left: {{ attemps }}</p>
                 <p>|</p>
                 <p class="word__points">Points: {{ point }}</p>
             </div>
