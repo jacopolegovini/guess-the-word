@@ -74,6 +74,8 @@ function getApi() {
         })
         .catch(error => {
             console.error(error);
+            getApi();
+
         });
 }
 

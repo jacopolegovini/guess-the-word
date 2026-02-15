@@ -17,6 +17,7 @@ header {
   align-items: center;
   height: 100px;
   background: #F5F5F5;
+  position: relative;
 }
 
 header h1 {
@@ -38,6 +39,17 @@ header h1 {
   border-bottom: 1px solid black;
   height: 2px;
   width: 25px;
+}
+
+.header .menu-lines:hover {
+  gap: 10px;
+  transition: all 0.3s ease;
+}
+
+.header .menu-lines:hover .menu-line {
+  border-bottom: 2px solid black;
+  width: 35px;
+  transition: all 0.3s ease;
 }
 
 /* Menu */
@@ -69,6 +81,11 @@ header h1 {
   border: 0;
   font-size: 3rem;
   cursor: pointer;
+  transition: transform 0.4s ease;
+}
+
+.menu .menu-close:hover {
+  transform: rotate(90deg);
 }
 
 .menu h3 {
@@ -238,3 +255,11 @@ footer {
 footer img {
   width: 40px;
 }
+
+/* Modifiche mobile */
+/* @media screen and (max-width: 768px) {
+  body {
+    background-color: blue;
+    color: white;
+  }
+} */
