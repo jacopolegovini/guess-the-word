@@ -8,8 +8,8 @@ const menuStore = useMenuStore();
 const word = ref<string>('');
 const definition = ref<string>('');
 const hiddenWord = ref<string>('');
-let answer = ref<string>('');
-let point = ref<number>(0);
+const answer = ref<string>('');
+const point = ref<number>(0);
 let firstApi = true;
 
 /**
@@ -118,7 +118,6 @@ onMounted(() => {
 });
 </script>
 
-<!-- ! Sistema il modo in cui gli attemps e i point interagiscono in pug e controlla che giri tutto correttamente -->
 <template>
     <main class="word">
         <div class="pug-winner" v-show="point === 10">
