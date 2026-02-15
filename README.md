@@ -10,7 +10,7 @@ A special prize awaits those who achieve a perfect game, will you be able to get
 * **API Integration**: Definitions are fetched in real-time from the [*Free Dictionary API*](https://dictionaryapi.dev/).
 * **Smart Obfuscation**: A custom algorithm hides letters based on the word length.
 * **Score System**: Gain points for correct answers and face penalties for mistakes.
-* **Limited Attempts**: You have 10 rounds to achieve the "Perfect Game".
+* **Limited Attempts**: You have 10 rounds to achieve the "Perfect Game", but you can change the attemps number if you want.
 
 ## 🛠️ Tech Stack
 * **Framework**: [Vue.js 3 (Composition API)](https://vuejs.org/)
